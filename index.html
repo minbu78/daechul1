@@ -4,10 +4,23 @@
     <meta charset="UTF-8">
     <title>대출 이자 계산기</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 40px; }
-        label { display: block; margin-top: 10px; }
-        input[type="number"] { width: 200px; }
-        .result { margin-top: 20px; font-weight: bold; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            color: green; /* 전체 텍스트 색상을 초록색으로 설정 */
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input[type="number"] {
+            width: 200px;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            color: green; /* 결과 텍스트도 초록색 */
+        }
     </style>
 </head>
 <body>
@@ -27,33 +40,4 @@
         </label>
         <button type="submit">계산하기</button>
     </form>
-    <div class="result" id="result"></div>
-
-    <script>
-        function calculateLoan(event) {
-            event.preventDefault();
-            const principal = parseFloat(document.getElementById('principal').value);
-            const rate = parseFloat(document.getElementById('rate').value) / 100 / 12;
-            const months = parseInt(document.getElementById('months').value);
-
-            if (isNaN(principal) || isNaN(rate) || isNaN(months) || principal <= 0 || rate < 0 || months <= 0) {
-                document.getElementById('result').innerHTML = '올바른 값을 입력하세요.';
-                return;
-            }
-
-            let monthlyPayment;
-            if (rate === 0) {
-                monthlyPayment = principal / months;
-            } else {
-                monthlyPayment = (principal * rate * Math.pow(1 + rate, months)) / (Math.pow(1 + rate, months) - 1);
-            }
-            const totalPayment = monthlyPayment * months;
-            const totalInterest = totalPayment - principal;
-
-            document.getElementById('result').innerHTML =
-                `월 상환금액: ${monthlyPayment.toLocaleString(undefined, {maximumFractionDigits:0})}원<br>` +
-                `총 이자액: ${totalInterest.toLocaleString(undefined, {maximumFractionDigits:0})}원`;
-        }
-    </script>
-</body>
-</html>
+    <div clas
